@@ -1,108 +1,30 @@
-<img src="http://www.marghoobsuleman.com/mywork/jcomponents/image-dropdown/samples/images/msdropdown/icons/preview.gif?v3.5.2" />
+# ms-Dropdown
+This is a fork from [marghoobsuleman/ms-Dropdown](http://web.andromoney.com/).
 
-### Can someone please create a help doc for this plugin? - Thanks in advance
+<br>
 
-### v3.5.2 updates: 13 July, 2013
-- height bug fixed.
-- multiple indexes can be set via object. 
-ie.  var oDropdown = $("#element").msDropdown().data("dd");
-oDropdown.set("selectedIndex", [1,4]);
-- checkbox selection is fixed when setting index via object.
-- css .arrow class is changed to .ddArrow (it was too common)
+At `master` branch, it is modified for [Bower](http://bower.io/), and you can add it to your project by: 
 
-### v3.5.1 updates: 
-- (used for my personal project - did not get the chance to update - Sorry!)
+     "dependencies": { 
+           "ms-Dropdown": "git@github.com:JasonYCHuang/ms-Dropdown.git"
+     }
 
-### v3.5 updates: 3 June, 2013
-- conflict edit in source js file fixed
-- autofilter is now configurable - it can be enable/disable by setting params or data-enableautofilter="true" attribute.
-- next/previous bug fixed when autofilter is on.
-- Bug fixed when item opens upward after autofilter.
+<br>
 
+- - -
 
-### v3.4 updates: 31 May, 2013
-- refresh method is back. you can refresh your dropdown to update the UI and value with the original dropdown or by the msdropdown object. 
-  i.e: $("#dropdownid").msDropdown().data("dd").refresh(); //or
-	document.getElementById("dropdownid").refresh();
-- removed underscore from the all the variables and methods name - for the sake of jslint
-- reverseMode - reverseMode settings param is true... When you update your original dropdown it will update the msdropdown UI and value. This is usefull when you use knockoutjs or other library
-- Now you can set open direction to always down by settings params in settings or data {openDirection:"alwaysdown"}
+<br>
 
-### v3.3 updates: 02 Feb, 2013
-- $.browser - jQuery 1.9 version fixed
-- Keyboard navigation issue has been fixed
-- destory is now destroy - oops typo error
+At `andromoney-record-table` branch, it is configured for [Andromoney project](https://web.andromoney.com/records/new?locale=en), and should look like: 
 
-### v3.2 updates: 26 Nov, 2012
-- All setting parameters can passed throught element's data- attributes. ie. data-maincss="blue"
-- zIndex bug fixed for list and dropdown if both on the same page.
-- Added setIndexByValue method. However same can be done by - handler.set("value", value)
-- Added "append" and "prepend" in setting params. append is used to append the element to the childdiv and prepend do as the name suggest. 
-- Added one more help file for objected oriented approach.
+![Markdown](/images/andromoney_record.png)
 
-### v3.1.1 updates:
-- chrome onchange bug fixed
-- zindex bug fixed for msie 
-- add method bug fixed for msie 
+<br>
 
-### v3.1 updates:
-- Child width can be alter
-- New multiple is introduced. Its multiple but with the checkbox.
-- <strong>Bonus:</strong> elementname<strong>_mscheck</strong> will be posted along with the form post/get. i.e. if element name is &quot;tech&quot; checkbox *tech_mscheck[]* is created. However you can set the suffix using 'checkboxNameSuffix' parameter.
+- - -
 
-### v3.0 updates:
-<ul>
-  <li>Written from scratch</li>
-  <li>Improved performance and UI</li>
-  <li>Improved auto filter experience</li>
-  <li>Added data- support in attributes for image, description, title, imagecss, text and value</li>
-  <li>Event can be bind/unbind through object</li>
-  <li>Organized folder structure</li>
-  <li>Old style (with title attribute) is also working.</li>
-  <li>Country dropdown with flags as a bonus</li>
-</ul>
-<strong>v2.38 updates:<br />
-</strong>
-<ul>
-  <li>document keydown/keyup method unbind</li>
-  <li>added json support in title. {image:'', title:''}</li>
-  <li>onchange bug on onclose</li>
-  <li>CSS style declaration problem</li>
-  <li>jQuery 1.7.1 compatibility issue</li>
-  <li>IE8 sprite</li>
-</ul>
-<strong>v2.37.5 updates:<br />
-</strong>
-<ul>
-  <li>Fixed an ie6 error.</li>
-</ul>
-<strong>v2.37 updates:<br />
-</strong>
-<ul>
-  <li>values are updated properly when it opens upwards</li>
-  <li>Now works with jQuery 1.6.1.</li>
-  <li>Improved performance</li>
-  <li>Added quick selection. Filter options on key press</li>
-</ul>
-<strong>v2.36 updates:<br />
-</strong>
-<ul>
-  <li>Onchange bug has been fixed. Finally :)</li>
-  <li>No more id is required.</li>
-</ul>
-<strong>v2.35 updates:<br />
-</strong>
-<ul>
-  <li>Now works in FF4.</li>
-  <li>Onchange bug has been fixed.</li>
-  <li>DropUp when your dropdown is showing at bottom of the page. </li>
-  <li>Some minor ui changes</li>
-</ul>
-<strong>v2.3 updates:<br />
-</strong>
-<ul>
-  <li>CSS sprite chrome bug has been fixed.</li>
-</ul>
+<br>
+<br>
 
 <p><strong>License</strong></p>
 You may use msDropDown under the terms of either the MIT License or 

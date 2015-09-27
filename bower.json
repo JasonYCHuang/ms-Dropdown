@@ -1,0 +1,28 @@
+{
+  "name": "ms-Dropdown",
+  "version": "0.1.0",
+  "homepage": "https://github.com/JasonYCHuang/ms-Dropdown",
+  "authors": [
+    "JasonYCH <ychuang1981@gmail.com>",
+    "folk-from <git@github.com:marghoobsuleman/ms-Dropdown.git>"
+  ],
+  "description": "convert dropdown(select) to image-dropdown",
+  "main": [
+    "js/msdropdown/jquery.dd.js",
+    "css/msdropdown/dd.css"
+  ],
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "msDropdown"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

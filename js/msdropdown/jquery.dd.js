@@ -456,7 +456,7 @@ function dd(element, settings) {
 			if (val == -1) { //auto
 				$("#"+childid).css({height: "auto", overflow: "auto"});
 			} else {				
-				$("#"+childid).css("height", "200px");	// adjust select height to a fix value !!!
+				$("#"+childid).css("height", "310px");	// adjust select height to a fix value !!!
 			};
 			return false;
 		};

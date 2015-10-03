@@ -290,7 +290,7 @@ function dd(element, settings) {
 		};
 		var intcss = getInternalStyle(getElement(element));
 		var w = $("#" + element).outerWidth();
-		obj.style = "width: 95%;";			// adjust select width!!!
+		obj.style = "width: 100%;";			// adjust select width!!!
 		if (intcss.length > 0) {
 			obj.style = obj.style + "" + intcss;
 		};

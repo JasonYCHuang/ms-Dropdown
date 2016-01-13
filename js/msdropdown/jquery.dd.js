@@ -55,7 +55,7 @@ function dd(element, settings) {
 		{byJson: {data: null, selectedIndex: 0, name: null, size: 1, multiple: false, width: "100%"},
 		mainCSS: 'dd',
 		height: 120, //not using currently
-		visibleRows: 2,		// fix rowHeight for multiple selection display.
+		visibleRows: 1,		// fix rowHeight for multiple selection display.
 		rowHeight: 0,
 		showIcon: true,
 		zIndex: 100,
@@ -452,11 +452,13 @@ function dd(element, settings) {
 	};
 	var childHeight = function (val) {
 		var childid = getPostID("postChildID");
+		var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+		var columnHeight = (h - 475) + "px";	// responsive height
 		if (val) {
 			if (val == -1) { //auto
 				$("#"+childid).css({height: "auto", overflow: "auto"});
 			} else {
-				$("#"+childid).css("height", "310px");	// adjust select height to a fix value !!!
+				$("#"+childid).css("height", columnHeight);	// adjust select height to a fix value !!!
 			};
 			return false;
 		};

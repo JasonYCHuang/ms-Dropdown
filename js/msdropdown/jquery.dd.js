@@ -1,13 +1,13 @@
 // MSDropDown - jquery.dd.js
 // author: Marghoob Suleman - http://www.marghoobsuleman.com/
-// Date: 10 Nov, 2012 
+// Date: 10 Nov, 2012
 // Version: 3.5.2
 // Revision: 27
 // web: www.marghoobsuleman.com
 /*
 // msDropDown is free jQuery Plugin: you can redistribute it and/or modify
 // it under the terms of the either the MIT License or the Gnu General Public License (GPL) Version 2
-*/ 
+*/
 var msBeautify = msBeautify || {};
 (function ($) {
 	msBeautify = {
@@ -76,8 +76,8 @@ function dd(element, settings) {
 		roundedCorner:false,	// disable round corner.
 		enableAutoFilter:true,
 		on: {create: null,open: null,close: null,add: null,remove: null,change: null,blur: null,click: null,dblclick: null,mousemove: null,mouseover: null,mouseout: null,focus: null,mousedown: null,mouseup: null}
-		}, settings);								  
-	var $this = this; //this class	 
+		}, settings);
+	var $this = this; //this class
 	var holderId = {postElementHolder: '_msddHolder', postID: '_msdd', postTitleID: '_title',postTitleTextID: '_titleText', postChildID: '_child'};
 	var css = {dd:settings.mainCSS, ddTitle: 'ddTitle', arrow: 'ddArrow arrowoff', ddChild: 'ddChild', ddTitleText: 'ddTitleText',disabled: 'disabled', enabled: 'enabled', ddOutOfVision: 'ddOutOfVision', borderTop: 'borderTop', noBorderTop: 'noBorderTop', selected: 'selected', divider: 'divider', optgroup: "optgroup", optgroupTitle: "optgroupTitle", description: "description", label: "ddlabel",hover: 'hover',disabledAll: 'disabledAll'};
 	var css_i = {li: '_msddli_',borderRadiusTp: 'borderRadiusTp',ddChildMore: 'border shadow',fnone: "fnone"};
@@ -91,7 +91,7 @@ function dd(element, settings) {
 		return (Object.prototype.toString.call(obj)=="[object Array]") ? true : false;
 	};
 	var msieversion = function()
-   	{      
+   	{
       var msie = ua.indexOf("MSIE");
       if ( msie > 0 ) {      // If Internet Explorer, return version number
          return parseInt (ua.substring (msie+5, ua.indexOf (".", msie)));
@@ -117,20 +117,20 @@ function dd(element, settings) {
 		settings.reverseMode = $("#"+element).data("reversemode") || settings.reverseMode;
 		settings.roundedCorner = $("#"+element).data("roundedcorner") || settings.roundedCorner;
 		settings.enableAutoFilter = $("#"+element).data("enableautofilter") || settings.enableAutoFilter;
-		
+
 		//make string
 		settings.reverseMode = settings.reverseMode.toString();
 		settings.roundedCorner = settings.roundedCorner.toString();
 		settings.enableAutoFilter = settings.enableAutoFilter.toString();
-	};	
+	};
 	var getElement = function(ele) {
 		if (cacheElement[ele] === undefined) {
 			cacheElement[ele] = doc.getElementById(ele);
 		}
 		return cacheElement[ele];
-	}; 	
+	};
 	var getIndex = function(opt) {
-		var childid = getPostID("postChildID"); 
+		var childid = getPostID("postChildID");
 		return $("#"+childid + " li."+css_i.li).index(opt);
 	};
 	var createByJson = function() {
@@ -154,8 +154,8 @@ function dd(element, settings) {
 					for(var i=0;i<settings.byJson.data.length;i++) {
 						var current = settings.byJson.data[i];
 						var opt = new Option(current.text, current.value);
-						for(var p in current) { 
-							if (p.toLowerCase() != 'text') { 
+						for(var p in current) {
+							if (p.toLowerCase() != 'text') {
 								var key = ($.inArray(p.toLowerCase(), validData)!=-1) ? "data-" : "";
 								opt.setAttribute(key+p, current[p]);
 							};
@@ -170,17 +170,17 @@ function dd(element, settings) {
 				} catch(e) {
 					throw "There is an error in json data.";
 				};
-		};			
+		};
 	};
-	var init = function() {		
+	var init = function() {
 		 //set properties
 		 createByJson();
 		if (!element.id) {
 			element.id = "msdrpdd"+(msBeautify.counter++);
-		};						
+		};
 		element = element.id;
 		$this.element = element;
-		checkDataSetting();		
+		checkDataSetting();
 		isDisabled = getElement(element).disabled;
 		var useCheckbox = settings.enableCheckbox;
 		if(useCheckbox.toString()==="true") {
@@ -189,16 +189,16 @@ function dd(element, settings) {
 		};
 		isList = (getElement(element).size>1 || getElement(element).multiple==true) ? true : false;
 		//trace("isList "+isList);
-		if (isList) {isMultiple = getElement(element).multiple;};			
-		mergeAllProp();		
+		if (isList) {isMultiple = getElement(element).multiple;};
+		mergeAllProp();
 		//create layout
-		createLayout();		
+		createLayout();
 		//set ui prop
 		updateProp("uiData", getDataAndUI());
 		updateProp("selectedOptions", $("#"+element +" option:selected"));
 		var childid = getPostID("postChildID");
 		oldSelected = $("#" + childid + " li." + css.selected);
-		
+
 		if(settings.reverseMode==="true") {
 			$("#"+element).on("change", function() {
 				setValue(this.selectedIndex);
@@ -209,12 +209,12 @@ function dd(element, settings) {
 			 $("#"+element).msDropdown().data("dd").refresh();
 		};
 
-	 };	
-	 /********************************************************************************************/	
+	 };
+	 /********************************************************************************************/
 	var getPostID = function (id) {
 		return element+holderId[id];
 	};
-	var getInternalStyle = function(ele) {		 
+	var getInternalStyle = function(ele) {
 		 var s = (ele.style === undefined) ? "" : ele.style.cssText;
 		 return s;
 	};
@@ -227,8 +227,8 @@ function dd(element, settings) {
 				var reg = /^\{.*\}$/;
 				var isJson = reg.test(attrTitle);
 				if (isJson && settings.jsonTitle) {
-					var obj =  eval("["+attrTitle+"]");	
-				};				 
+					var obj =  eval("["+attrTitle+"]");
+				};
 				title = (isJson && settings.jsonTitle) ? obj[0].title : title;
 				description = (isJson && settings.jsonTitle) ? obj[0].description : description;
 				imagePath = (isJson && settings.jsonTitle) ? obj[0].image : attrTitle;
@@ -248,7 +248,7 @@ function dd(element, settings) {
 		};
 		var o = {image: imagePath, title: title, description: description, value: value, text: text, className: className, imagecss:imagecss, index:index};
 		return o;
-	};	 
+	};
 	var createElement = function(nm, attr, html) {
 		var tag = doc.createElement(nm);
 		if (attr) {
@@ -260,7 +260,7 @@ function dd(element, settings) {
 				 default:
 					tag[i]  = attr[i];
 				 break;
-			 };	
+			 };
 		 };
 		};
 		if (html) {
@@ -272,10 +272,10 @@ function dd(element, settings) {
 	  /*********************** <layout> *************************************/
 	var hideOriginal = function() {
 		var hidid = getPostID("postElementHolder");
-		if ($("#"+hidid).length==0) {			 
-			var obj = {style: 'height: 0px;overflow: hidden;position: absolute;',className: css.ddOutOfVision};	
+		if ($("#"+hidid).length==0) {
+			var obj = {style: 'height: 0px;overflow: hidden;position: absolute;',className: css.ddOutOfVision};
 			obj.id = hidid;
-			var oDiv = createElement("div", obj);	
+			var oDiv = createElement("div", obj);
 			$("#"+element).after(oDiv);
 			$("#"+element).appendTo($("#"+hidid));
 		} else {
@@ -323,10 +323,10 @@ function dd(element, settings) {
 		//title Text
 		var titleid = getPostID("postTitleID");
 		var oTitleText = createElement("span", {className: css.ddTitleText + selectedClass, id: titleid});
-	
+
 		var parsed = parseOption(selectedOption);
 		var arrowPath = parsed.image;
-		var sText = parsed.text || "";		
+		var sText = parsed.text || "";
 		if (arrowPath != "" && settings.showIcon) {
 			var oIcon = createElement("img");
 			oIcon.src = arrowPath;
@@ -420,7 +420,7 @@ function dd(element, settings) {
 		var childWidth = $("#"+element).data("childwidth") || settings.childWidth;
 		if(childWidth) {
 			obj.style =  (obj.style || "") + ";width:"+childWidth;
-		};		
+		};
 		var oDiv = createElement("div", obj);
 		var ul = createElement("ul");
 		if (settings.useSprite != false) {
@@ -447,7 +447,7 @@ function dd(element, settings) {
 			};
 			ul.appendChild(li);
 		};
-		oDiv.appendChild(ul);		
+		oDiv.appendChild(ul);
 		return oDiv;
 	};
 	var childHeight = function (val) {
@@ -455,7 +455,7 @@ function dd(element, settings) {
 		if (val) {
 			if (val == -1) { //auto
 				$("#"+childid).css({height: "auto", overflow: "auto"});
-			} else {				
+			} else {
 				$("#"+childid).css("height", "310px");	// adjust select height to a fix value !!!
 			};
 			return false;
@@ -477,7 +477,7 @@ function dd(element, settings) {
 			iHeight = ((settings.rowHeight + margin) * Math.min(settings.visibleRows,totalOptions)) + 3;
 		} else if (isList) {
 			iHeight = $("#" + element).height(); //get height from original element
-		};		
+		};
 		return iHeight;
 	};
 	var applyChildEvents = function () {
@@ -506,10 +506,10 @@ function dd(element, settings) {
 			if(settings.enableCheckbox===true) {
 				if(e.target.nodeName.toLowerCase() === "input") {
 					controlHolded = true;
-				};	
+				};
 			};
 			if (isList === true) {
-				if (isMultiple) {					
+				if (isMultiple) {
 					if (shiftHolded === true) {
 						$(this).addClass(css.selected);
 						var selected = $("#" + childid + " li." + css.selected);
@@ -542,7 +542,7 @@ function dd(element, settings) {
 						if(settings.enableCheckbox===true) {
 							this.childNodes[0].checked = true;
 						};
-					};					
+					};
 				} else {
 					$("#" + childid + " li." + css.selected).removeClass(css.selected);
 					$(this).addClass(css.selected);
@@ -551,7 +551,7 @@ function dd(element, settings) {
 			} else {
 				$("#" + childid + " li." + css.selected).removeClass(css.selected);
 				$(this).addClass(css.selected);
-			};		
+			};
 		});
 		$("#" + childid + " li." + css.enabled).on("mouseenter", function (e) {
 			if (isDisabled === true) return false;
@@ -566,7 +566,7 @@ function dd(element, settings) {
 				};
 			};
 		});
-	
+
 		$("#" + childid + " li." + css.enabled).on("mouseover", function (e) {
 			if (isDisabled === true) return false;
 			$(this).addClass(css.hover);
@@ -575,7 +575,7 @@ function dd(element, settings) {
 			if (isDisabled === true) return false;
 			$("#" + childid + " li." + css.hover).removeClass(css.hover);
 		});
-	
+
 		$("#" + childid + " li." + css.enabled).on("mouseup", function (e) {
 			if (isDisabled === true) return false;
 			e.preventDefault();
@@ -583,14 +583,14 @@ function dd(element, settings) {
 			if(settings.enableCheckbox===true) {
 				controlHolded = false;
 			};
-			var selected = $("#" + childid + " li." + css.selected).length;			
-			forcedTrigger = (oldSelected.length != selected || selected == 0) ? true : false;	
+			var selected = $("#" + childid + " li." + css.selected).length;
+			forcedTrigger = (oldSelected.length != selected || selected == 0) ? true : false;
 			fireAfterItemClicked();
 			unbind_on_events(); //remove old one
 			bind_on_events();
 			lastTarget = null;
 		});
-	
+
 		/* options events */
 		if (settings.disabledOptionEvents == false) {
 			$("#" + childid + " li." + css_i.li).on("click", function (e) {
@@ -637,8 +637,8 @@ function dd(element, settings) {
 	var applyEvents = function () {
 		var id = getPostID("postID");
 		var tid = getPostID("postTitleTextID");
-		var childid = getPostID("postChildID");		
-		$("#" + id).on(settings.event, function (e) {			
+		var childid = getPostID("postChildID");
+		$("#" + id).on(settings.event, function (e) {
 			if (isDisabled === true) return false;
 			fireEventIfExist(settings.event);
 			//prevent body click
@@ -666,7 +666,7 @@ function dd(element, settings) {
 			//return focus to the wrapper without triggering the handler
 			triggerBypassingHandler(id, "focus", wrapperFocusHandler);
 		});
-		applyChildEvents();		
+		applyChildEvents();
 		$("#" + id).on("dblclick", on_dblclick);
 		$("#" + id).on("mousemove", on_mousemove);
 		$("#" + id).on("mouseenter", on_mouseover);
@@ -683,10 +683,10 @@ function dd(element, settings) {
 	//after create
 	var fixedForList = function () {
 		var id = getPostID("postID");
-		var childid = getPostID("postChildID");		
+		var childid = getPostID("postChildID");
 		if (isList === true && settings.enableCheckbox===false) {
 			$("#" + id + " ." + css.ddTitle).hide();
-			$("#" + childid).css({display: 'block', position: 'relative'});	
+			$("#" + childid).css({display: 'block', position: 'relative'});
 			//open();
 		} else {
 			if(settings.enableCheckbox===false) {
@@ -700,7 +700,7 @@ function dd(element, settings) {
 			var index = getIndex($(first).addClass(css.selected));
 			setValue(index);
 		};
-		childHeight(childHeight()); //get and set height 
+		childHeight(childHeight()); //get and set height
 	};
 	var fixedForDisabled = function () {
 		var id = getPostID("postID");
@@ -721,21 +721,21 @@ function dd(element, settings) {
 		fixedForList();
 		fixedForDisabled();
 	};
-	var createLayout = function () {		
+	var createLayout = function () {
 		var oDiv = createWrapper();
 		var oTitle = createTitle();
 		oDiv.appendChild(oTitle);
 		//auto filter box
 		var oFilterBox = createFilterBox();
 		oDiv.appendChild(oFilterBox);
-	
+
 		var oChildren = createChildren();
 		oDiv.appendChild(oChildren);
 		$("#" + element).after(oDiv);
 		hideOriginal(); //hideOriginal
 		fixedSomeUI();
 		applyEvents();
-		
+
 		var childid = getPostID("postChildID");
 		//append
 		if(settings.append!='') {
@@ -744,7 +744,7 @@ function dd(element, settings) {
 		//prepend
 		if(settings.prepend!='') {
 			$("#" + childid).prepend(settings.prepend);
-		};		
+		};
 		if (typeof settings.on.create == "function") {
 			settings.on.create.apply($this, arguments);
 		};
@@ -767,7 +767,7 @@ function dd(element, settings) {
 			if(settings.enableCheckbox===true) {
 				$($("#" + childid + " li." + css_i.li)[index]).find("input.checkbox").prop("checked", "checked");
 			};
-			
+
 		};
 	};
 	var selectMutipleOptions = function (bySelected, useIndexes) {
@@ -782,7 +782,7 @@ function dd(element, settings) {
 	var fireAfterItemClicked = function () {
 		//console.log("fireAfterItemClicked")
 		var childid = getPostID("postChildID");
-		var selected = $("#" + childid + " li." + css.selected);		
+		var selected = $("#" + childid + " li." + css.selected);
 		if (isMultiple && (shiftHolded || controlHolded) || forcedTrigger) {
 			getElement(element).selectedIndex = -1; //reset old
 		};
@@ -795,18 +795,18 @@ function dd(element, settings) {
 		} else {
 			//if one selected
 			index = getIndex($("#" + childid + " li." + css.selected));
-		};		
-		if ((getElement(element).selectedIndex != index || forcedTrigger) && selected.length<=1) {			
-			forcedTrigger = false;			
+		};
+		if ((getElement(element).selectedIndex != index || forcedTrigger) && selected.length<=1) {
+			forcedTrigger = false;
 			var evt = has_handler("change");
-			getElement(element).selectedIndex = index;	
+			getElement(element).selectedIndex = index;
 			setValue(index);
 			//local
 			if (typeof settings.on.change == "function") {
 				var d = getDataAndUI();
 				settings.on.change(d.data, d.ui);
-			};			
-			$("#" + element).trigger("change");			
+			};
+			$("#" + element).trigger("change");
 		};
 	};
 	var setValue = function (index, byvalue) {
@@ -833,9 +833,9 @@ function dd(element, settings) {
 					value = (byvalue && byvalue.value) || getElement(element).value;
 					selectedText = (byvalue && byvalue.text) || getElement(element).options[getElement(element).selectedIndex].text || "";
 					updateTitleUI(selectedIndex);
-					//check if this is multiple checkbox					
+					//check if this is multiple checkbox
 				};
-			};			
+			};
 			updateProp("selectedIndex", selectedIndex);
 			updateProp("value", value);
 			updateProp("selectedText", selectedText);
@@ -874,10 +874,10 @@ function dd(element, settings) {
 	var bind_on_events = function () {
 		unbind_on_events();
 		$("body").on("click", close);
-		//bind more events		 
+		//bind more events
 		$(document).on("keydown", on_keydown);
 		$(document).on("keyup", on_keyup);
-		//focus will work on this	 		 
+		//focus will work on this
 	};
 	var unbind_on_events = function () {
 		$("body").off("click", close);
@@ -904,8 +904,8 @@ function dd(element, settings) {
 			if (items.length > 0 && !isList || !isMultiple) {
 				$("#" + childid + " ." + css.selected).removeClass(css.selected);
 				$(items[0]).addClass(css.selected);
-			};	
-		};		
+			};
+		};
 		if (!isList) {
 			adjustOpen();
 		};
@@ -952,11 +952,11 @@ function dd(element, settings) {
 				evt.preventDefault();
 				evt.stopPropagation();
 				close();
-				var selected = $("#" + childid + " li." + css.selected).length;	
-				forcedTrigger = (oldSelected.length != selected || selected == 0) ? true : false;				
+				var selected = $("#" + childid + " li." + css.selected).length;
+				forcedTrigger = (oldSelected.length != selected || selected == 0) ? true : false;
 				fireAfterItemClicked();
-				unbind_on_events(); //remove old one				
-				lastTarget = null;			
+				unbind_on_events(); //remove old one
+				lastTarget = null;
 				break;
 			case SHIFT:
 				shiftHolded = true;
@@ -993,7 +993,7 @@ function dd(element, settings) {
 		if (isDisabled === true) return false;
 		fireEventIfExist("mousemove");
 	};
-	
+
 	var on_mouseover = function (evt) {
 		if (isDisabled === true) return false;
 		evt.preventDefault();
@@ -1095,7 +1095,7 @@ function dd(element, settings) {
 		var index = $("#" + childid + " li:visible." + css_i.li).index(selected);
 		if ((index < items.length - 1)) {
 			index = getNext(index);
-			if (index < items.length) { //check again - hack for last disabled 
+			if (index < items.length) { //check again - hack for last disabled
 				if (!shiftHolded || !isList || !isMultiple) {
 					$("#" + childid + " ." + css.selected).removeClass(css.selected);
 				};
@@ -1109,7 +1109,7 @@ function dd(element, settings) {
 			if (!isList) {
 				adjustOpen();
 			};
-		};	
+		};
 		function getNext(ind) {
 			ind = ind + 1;
 			if (ind > items.length) {
@@ -1128,7 +1128,7 @@ function dd(element, settings) {
 		var index = $("#" + childid + " li:visible." + css_i.li).index(selected[0]);
 		if (index >= 0) {
 			index = getPrev(index);
-			if (index >= 0) { //check again - hack for disabled 
+			if (index >= 0) { //check again - hack for disabled
 				if (!shiftHolded || !isList || !isMultiple) {
 					$("#" + childid + " ." + css.selected).removeClass(css.selected);
 				};
@@ -1146,7 +1146,7 @@ function dd(element, settings) {
 				adjustOpen();
 			};
 		};
-	
+
 		function getPrev(ind) {
 			ind = ind - 1;
 			if (ind < 0) {
@@ -1170,7 +1170,7 @@ function dd(element, settings) {
 		var direction = settings.openDirection.toLowerCase();
 		if (((wH + st) < Math.floor(cH + mH + pos.top) || direction == 'alwaysup') && direction != 'alwaysdown') {
 			top = cH;
-			$("#" + childid).css({top: "-" + top + "px", display: 'block', zIndex: settings.zIndex});			
+			$("#" + childid).css({top: "-" + top + "px", display: 'block', zIndex: settings.zIndex});
 			if(settings.roundedCorner == "true") {
 				$("#" + id).removeClass("borderRadius borderRadiusTp").addClass("borderRadiusBtm");
 			};
@@ -1182,7 +1182,7 @@ function dd(element, settings) {
 				};
 			};
 		} else {
-			$("#" + childid).css({top: top + "px", zIndex: settings.zIndex});			
+			$("#" + childid).css({top: top + "px", zIndex: settings.zIndex});
 			if(settings.roundedCorner == "true") {
 				$("#" + id).removeClass("borderRadius borderRadiusBtm").addClass("borderRadiusTp");
 			};
@@ -1194,7 +1194,7 @@ function dd(element, settings) {
 				$('div.ddcommon').css("zIndex", settings.zIndex-10);
 				$("#" + id).css("zIndex", settings.zIndex+5);
 			};
-		};		
+		};
 	};
 	var open = function (e) {
 		if (isDisabled === true) return false;
@@ -1203,7 +1203,7 @@ function dd(element, settings) {
 		if (!isOpen) {
 			isOpen = true;
 			if (msBeautify.oldDiv != '') {
-				$("#" + msBeautify.oldDiv).css({display: "none"}); //hide all 
+				$("#" + msBeautify.oldDiv).css({display: "none"}); //hide all
 			};
 			msBeautify.oldDiv = childid;
 			$("#" + childid + " li:hidden").show(); //show if hidden
@@ -1216,7 +1216,7 @@ function dd(element, settings) {
 					var d = getDataAndUI();
 					settings.on.open(d.data, d.ui);
 				};
-			} else {				
+			} else {
 				$("#" + childid)[animStyle]("fast", function () {
 					scrollToIfNeeded();
 					if (typeof settings.on.open == "function") {
@@ -1237,7 +1237,7 @@ function dd(element, settings) {
 		var id = getPostID("postID");
 		var childid = getPostID("postChildID");
 		if (isList === false || settings.enableCheckbox===true) {
-			$("#" + childid).css({display: "none"});			
+			$("#" + childid).css({display: "none"});
 			if(settings.roundedCorner == "true") {
 				$("#" + id).removeClass("borderRadiusTp borderRadiusBtm").addClass("borderRadius");
 			};
@@ -1254,19 +1254,19 @@ function dd(element, settings) {
 		//update the title in case the user clicked outside
 		updateTitleUI(getElement(element).selectedIndex);
 	};
-	/*********************** </layout> *************************************/	
+	/*********************** </layout> *************************************/
 	var mergeAllProp = function () {
 		try {
 			orginial = $.extend(true, {}, getElement(element));
 			for (var i in orginial) {
-				if (typeof orginial[i] != "function") {				
+				if (typeof orginial[i] != "function") {
 					$this[i] = orginial[i]; //properties
 				};
 			};
 		} catch(e) {
 			//silent
 		};
-		$this.selectedText = (getElement(element).selectedIndex >= 0) ? getElement(element).options[getElement(element).selectedIndex].text : "";		
+		$this.selectedText = (getElement(element).selectedIndex >= 0) ? getElement(element).options[getElement(element).selectedIndex].text : "";
 		$this.version = msBeautify.version.msDropdown;
 		$this.author = msBeautify.author;
 	};
@@ -1355,13 +1355,13 @@ function dd(element, settings) {
 		var wasSelected = false;
 		switch (a) {
 			case "add":
-				var li = createChild(opt || getElement(element).options[i]);				
+				var li = createChild(opt || getElement(element).options[i]);
 				var index;
 				if (arguments.length == 3) {
 					index = i;
 				} else {
 					index = $("#" + childid + " li." + css_i.li).length - 1;
-				};				
+				};
 				if (index < 0 || !index) {
 					$("#" + childid + " ul").append(li);
 				} else {
@@ -1395,7 +1395,7 @@ function dd(element, settings) {
 					settings.on.remove.apply(this, arguments);
 				};
 				break;
-		};	
+		};
 	};
 	/************************** public methods/events **********************/
 	this.act = function () {
@@ -1417,10 +1417,10 @@ function dd(element, settings) {
 				break;
 		};
 	};
-	
+
 	this.add = function () {
 		var text, value, title, image, description;
-		var obj = arguments[0];		
+		var obj = arguments[0];
 		if (typeof obj == "string") {
 			text = obj;
 			value = text;
@@ -1477,13 +1477,13 @@ function dd(element, settings) {
 				fixedForDisabled();
 				break;
 			case "selectedIndex":
-			case "value":				
+			case "value":
 				if(prop=="selectedIndex" && isArray(val)===true) {
 					$("#"+element +" option").prop("selected", false);
 					selectMutipleOptions(val, true);
 					selectUI_LI(val); //setValue is being called from selectMutipleOptions
 				} else {
-					getElement(element)[prop] = val;					
+					getElement(element)[prop] = val;
 					selectUI_LI(getElement(element).selectedIndex);
 					setValue(getElement(element).selectedIndex);
 				};
@@ -1523,7 +1523,7 @@ function dd(element, settings) {
 		return $this[prop] || getElement(element)[prop]; //return if local else from original
 	};
 	this.visible = function (val) {
-		var id = getPostID("postID");		
+		var id = getPostID("postID");
 		if (val === true) {
 			$("#" + id).show();
 		} else if (val === false) {
@@ -1538,7 +1538,7 @@ function dd(element, settings) {
 	this.close = function () {
 		close();
 	};
-	this.open = function () {		
+	this.open = function () {
 		open();
 	};
 	this.showRows = function (r) {
@@ -1566,7 +1566,7 @@ function dd(element, settings) {
 	this.item = function () {
 		var opt = getElement(element).item.apply(getElement(element), arguments);
 		return getDataAndUIByOption(opt);
-	};	
+	};
 	//v 3.2
 	this.setIndexByValue = function(val) {
 		this.set("value", val);
@@ -1577,13 +1577,13 @@ function dd(element, settings) {
 		$("#" + id + ", #" + id + " *").off();
 		getElement(element).tabIndex = getElement(id).tabIndex;
 		$("#" + id).remove();
-		$("#" + element).parent().replaceWith($("#" + element));		
+		$("#" + element).parent().replaceWith($("#" + element));
 		$("#" + element).data("dd", null);
 	};
 	this.refresh = function() {
 		setValue(getElement(element).selectedIndex);
 	};
-	//Create msDropDown	
+	//Create msDropDown
 	init();
 };
 //bind in jquery

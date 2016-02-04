@@ -454,6 +454,9 @@ function dd(element, settings) {
 		var childid = getPostID("postChildID");
 		var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 		var columnHeight = (h - 535) + "px";	// responsive height
+    if (window.innerHeight<660) {
+      columnHeight = (h - 330) + "px";  // responsive height
+    }
 		if (val) {
 			if (val == -1) { //auto
 				$("#"+childid).css({height: "auto", overflow: "auto"});
